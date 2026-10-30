@@ -11,4 +11,4 @@ script = ExtResource("1_ig7tw")
 [node name="Sprite2D" type="Sprite2D" parent="Player" unique_id=1252225756]
 texture = ExtResource("2_0xm2m")
 
-[node name="Camera2D" type="Camera2D" parent="Player" unique_id=1668456435]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1668456435]
