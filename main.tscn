@@ -1507,6 +1507,9 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_efxa6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4c57u")
 }],
 "loop": 1,
 "name": &"walk_down",
@@ -1521,6 +1524,9 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_w48qg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ycdy4")
 }],
 "loop": 1,
 "name": &"walk_left",
@@ -1535,6 +1541,9 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_yaehf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2cqfq")
 }],
 "loop": 1,
 "name": &"walk_right",
@@ -1549,6 +1558,9 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_82xsv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cegan")
 }],
 "loop": 1,
 "name": &"walk_up",
@@ -1584,7 +1596,7 @@ zoom = Vector2(3, 3)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player" unique_id=2136645015]
 texture_filter = 1
-position = Vector2(-2.499998, -7.500017)
+position = Vector2(-2.499998, 2.5)
 scale = Vector2(17.187498, 17.812498)
 sprite_frames = SubResource("SpriteFrames_3ubgv")
-animation = &"idle_down"
+animation = &"walk_up"
