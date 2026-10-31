@@ -17,3 +17,13 @@ texture = ExtResource("1_x5t65")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1808206051]
 shape = SubResource("RectangleShape2D_o001h")
+
+[node name="ProgressBar" type="ProgressBar" parent="." unique_id=2053312790]
+modulate = Color(1, 0, 0, 1)
+offset_left = -200.0
+offset_top = 214.0
+offset_right = 198.0
+offset_bottom = 289.0
+max_value = 50.0
+value = 50.0
+show_percentage = false
