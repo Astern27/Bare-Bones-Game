@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://csjfprmlar4f0"]
 
-[ext_resource type="Script" path="res://guard.gd" id="1_30cdx"]
+[ext_resource type="Script" uid="uid://dwtlnbyn2bh8v" path="res://Scripts/guard.gd" id="1_30cdx"]
 [ext_resource type="Texture2D" path="res://Guard-Walk.png" id="2_aoykg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rffmb"]
@@ -163,7 +163,6 @@ animations = [{
 
 [node name="Guard" type="CharacterBody2D" unique_id=111662285]
 script = ExtResource("1_30cdx")
-patrol_points = Array[Vector2]([Vector2(220, -210)])
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1537900154]
 position = Vector2(229, -210)
@@ -174,7 +173,7 @@ texture_filter = 1
 position = Vector2(229, -210)
 scale = Vector2(1, 0.8958333)
 sprite_frames = SubResource("SpriteFrames_rffmb")
-animation = &"idle_down"
+animation = &"walk_right"
 
 [node name="RayCast2D" type="RayCast2D" parent="." unique_id=1141905788]
 position = Vector2(229, -210)

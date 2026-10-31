@@ -1,9 +1,8 @@
 [gd_scene format=3 uid="uid://uqb1akl0s3i6"]
 
-[ext_resource type="Script" path="res://player.gd" id="1_ig7tw"]
 [ext_resource type="Texture2D" path="res://graveyard(2).png" id="2_1bvp3"]
+[ext_resource type="PackedScene" uid="uid://b5dxfhyuq1b0u" path="res://Prefabs/player.tscn" id="3_1bvp3"]
 [ext_resource type="Texture2D" path="res://graveyard.png" id="3_h2yge"]
-[ext_resource type="Texture2D" path="res://SpriteSheet.png" id="4_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://cmcqoxj50vu04" path="res://dig.tscn" id="5_lquwl"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1bvp3"]
@@ -1442,164 +1441,6 @@ physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_1bvp3")
 sources/1 = SubResource("TileSetAtlasSource_lquwl")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_o001h"]
-size = Vector2(250.00015, 250.00021)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_lquwl"]
-atlas = ExtResource("4_1bvp3")
-region = Rect2(0, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_7mycd"]
-atlas = ExtResource("4_1bvp3")
-region = Rect2(32, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_272bh"]
-atlas = ExtResource("4_1bvp3")
-region = Rect2(48, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_5vw27"]
-atlas = ExtResource("4_1bvp3")
-region = Rect2(16, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_kek77"]
-atlas = ExtResource("4_1bvp3")
-region = Rect2(0, 16, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_4c57u"]
-atlas = ExtResource("4_1bvp3")
-region = Rect2(0, 32, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_efxa6"]
-atlas = ExtResource("4_1bvp3")
-region = Rect2(0, 48, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_dg77c"]
-atlas = ExtResource("4_1bvp3")
-region = Rect2(32, 16, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ycdy4"]
-atlas = ExtResource("4_1bvp3")
-region = Rect2(32, 32, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_w48qg"]
-atlas = ExtResource("4_1bvp3")
-region = Rect2(32, 48, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_vivmo"]
-atlas = ExtResource("4_1bvp3")
-region = Rect2(48, 16, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_2cqfq"]
-atlas = ExtResource("4_1bvp3")
-region = Rect2(48, 32, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_yaehf"]
-atlas = ExtResource("4_1bvp3")
-region = Rect2(48, 48, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_074og"]
-atlas = ExtResource("4_1bvp3")
-region = Rect2(16, 16, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_cegan"]
-atlas = ExtResource("4_1bvp3")
-region = Rect2(16, 32, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_82xsv"]
-atlas = ExtResource("4_1bvp3")
-region = Rect2(16, 48, 16, 16)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_3ubgv"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_lquwl")
-}],
-"loop": 0,
-"name": &"idle_down",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_7mycd")
-}],
-"loop": 0,
-"name": &"idle_left",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_272bh")
-}],
-"loop": 0,
-"name": &"idle_right",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_5vw27")
-}],
-"loop": 0,
-"name": &"idle_up",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_kek77")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_4c57u")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_efxa6")
-}],
-"loop": 1,
-"name": &"walk_down",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_dg77c")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ycdy4")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_w48qg")
-}],
-"loop": 1,
-"name": &"walk_left",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_vivmo")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_2cqfq")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_yaehf")
-}],
-"loop": 1,
-"name": &"walk_right",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_074og")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_cegan")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_82xsv")
-}],
-"loop": 1,
-"name": &"walk_up",
-"speed": 5.0
-}]
-
 [sub_resource type="LabelSettings" id="LabelSettings_lquwl"]
 font_size = 20
 
@@ -1617,26 +1458,7 @@ layer_2/z_index = 2
 layer_2/tile_data = PackedInt32Array(1376288, 1769472, 11, 1441760, 1507328, 11, 1441761, 1572864, 11, 1441762, 1638400, 11, 1441763, 1703936, 11, 1441764, 1572864, 11, 1441765, 1638400, 11, 1441766, 1703936, 11, 1441767, 1572864, 11, 1441768, 1638400, 11, 1441769, 1703936, 11, 1441770, 1572864, 11, 1441771, 1638400, 11, 1441772, 1703936, 11, 1441773, 1572864, 11, 1441774, 1638400, 11, 1441775, 1703936, 11, 1441776, 1572864, 11, 1441777, 1638400, 11, 1441778, 1703936, 11, 1441779, 1572864, 11, 1441780, 1638400, 11, 1441781, 1703936, 11, 1441782, 1572864, 11, 1441783, 1638400, 11, 1441784, 1703936, 11, 1441785, 1572864, 11, 1441786, 1638400, 11, 1441787, 1703936, 11, 1441788, 1572864, 11, 1441789, 1769472, 11, 1376259, 1507328, 11, 1376260, 1703936, 11, 1376261, 1572864, 11, 1376262, 1638400, 11, 1376263, 1703936, 11, 1376264, 1572864, 11, 1376265, 1638400, 11, 1376266, 1703936, 11, 1376267, 1572864, 11, 1376268, 1638400, 11, 1376269, 1703936, 11, 1376270, 1572864, 11, 1376271, 1638400, 11, 1376272, 1703936, 11, 1376273, 1572864, 11, 1376274, 1638400, 11, 1376275, 1703936, 11, 1376276, 1572864, 11, 1376277, 1638400, 11, 1376278, 1703936, 11, 1376279, 1572864, 11, 1376280, 1638400, 11, 1376281, 1703936, 11, 1376282, 1572864, 11, 1376283, 1638400, 11, 1376284, 1703936, 11, 1376285, 1572864, 11, 1376286, 1638400, 11, 1376287, 1703936, 11, -1507296, 1769472, 8, -1507299, 1572864, 8, -1507298, 1638400, 8, -1507297, 1703936, 8, -1507302, 1572864, 8, -1507301, 1638400, 8, -1507300, 1703936, 8, -1507305, 1572864, 8, -1507304, 1638400, 8, -1507303, 1703936, 8, -1507308, 1572864, 8, -1507307, 1638400, 8, -1507306, 1703936, 8, -1507311, 1572864, 8, -1507310, 1638400, 8, -1507309, 1703936, 8, -1507314, 1572864, 8, -1507313, 1638400, 8, -1507312, 1703936, 8, -1507317, 1572864, 8, -1507316, 1638400, 8, -1507315, 1703936, 8, -1507320, 1572864, 8, -1507319, 1638400, 8, -1507318, 1703936, 8, -1507323, 1572864, 8, -1507322, 1638400, 8, -1507321, 1703936, 8, -1507326, 1572864, 8, -1507325, 1638400, 8, -1507324, 1703936, 8, -1441793, 1572864, 8, -1507328, 1638400, 8, -1507327, 1703936, 8, -1441796, 1572864, 8, -1441795, 1638400, 8, -1441794, 1703936, 8, -1441799, 1572864, 8, -1441798, 1638400, 8, -1441797, 1703936, 8, -1441802, 1572864, 8, -1441801, 1638400, 8, -1441800, 1703936, 8, -1441805, 1572864, 8, -1441804, 1638400, 8, -1441803, 1703936, 8, -1441808, 1572864, 8, -1441807, 1638400, 8, -1441806, 1703936, 8, -1441811, 1572864, 8, -1441810, 1638400, 8, -1441809, 1703936, 8, -1441814, 1572864, 8, -1441813, 1638400, 8, -1441812, 1703936, 8, -1441817, 1572864, 8, -1441816, 1638400, 8, -1441815, 1703936, 8, -1441820, 1572864, 8, -1441819, 1638400, 8, -1441818, 1703936, 8, -1441823, 1572864, 8, -1441822, 1638400, 8, -1441821, 1703936, 8, -1441824, 1507328, 8, 786452, 65536, 16, 851988, 65536, 17, 786453, 131072, 16, 851989, 131072, 17, 786458, 65536, 16, 851994, 65536, 17, 786459, 131072, 16, 851995, 131072, 17, 393244, 1310720, 14, 458780, 1310720, 15, 524316, 1310720, 16, 393245, 1376256, 14, 458781, 1376256, 15, 393246, 1441792, 14, 458782, 1441792, 15, 524318, 1441792, 16, 851940, 327680, 26, 917476, 327680, 27, 851941, 393216, 26, 917477, 393216, 27, 983020, 65536, 16, 1048556, 65536, 17, 983021, 131072, 16, 1048557, 131072, 17, 1048551, 458752, 15, -1048603, 65536, 27, -1114138, 131072, 26, -1048602, 131072, 27, -1114137, 196608, 26, -1048601, 196608, 27, -1048600, 262144, 27, -1179621, 65536, 16, -1114085, 65536, 17, -1179620, 131072, 16, -1114084, 131072, 17, -983017, 327680, 26, -917481, 327680, 27, -983016, 393216, 26, -917480, 393216, 27, -1114092, 262144, 16)
 metadata/_edit_group_ = true
 
-[node name="Player" type="CharacterBody2D" parent="." unique_id=668550443]
-z_index = 1
-scale = Vector2(0.1, 0.1)
-script = ExtResource("1_ig7tw")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player" unique_id=359346300]
-position = Vector2(5.000011, 14.999939)
-scale = Vector2(0.9999989, 0.9999989)
-shape = SubResource("RectangleShape2D_o001h")
-
-[node name="Camera2D" type="Camera2D" parent="Player" unique_id=1668456435]
-scale = Vector2(9.999999, 9.999999)
-zoom = Vector2(3, 3)
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player" unique_id=2136645015]
-texture_filter = 1
-position = Vector2(-2.499998, -7.500017)
-scale = Vector2(17.187498, 17.812498)
-sprite_frames = SubResource("SpriteFrames_3ubgv")
-animation = &"idle_down"
+[node name="Player" parent="." unique_id=1981730263 instance=ExtResource("3_1bvp3")]
 
 [node name="Dig Sites" type="Node2D" parent="." unique_id=1307790401]
 
