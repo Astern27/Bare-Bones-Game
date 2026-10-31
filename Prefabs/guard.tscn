@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://csjfprmlar4f0"]
 
-[ext_resource type="Texture2D" path="res://Guard-Walk.png" id="1_stbbk"]
+[ext_resource type="Texture2D" uid="uid://dks3ecy45cg33" path="res://Sprites/Guard-Walk.png" id="1_stbbk"]
 
 [sub_resource type="GDScript" id="GDScript_hc525"]
 script/source = "extends CharacterBody2D
