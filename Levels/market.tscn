@@ -1,0 +1,296 @@
+[gd_scene format=3 uid="uid://wuf0su6pxqtx"]
+
+[ext_resource type="Script" uid="uid://csrvgnromk0y6" path="res://Scripts/market.gd" id="1_hboqi"]
+[ext_resource type="Script" uid="uid://b1i51cawhh1h" path="res://Scripts/slot1.gd" id="2_8ceqg"]
+[ext_resource type="Script" uid="uid://d1uyx7frp1bnp" path="res://Scripts/slot2.gd" id="3_f3crt"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_o001h"]
+font_size = 64
+
+[sub_resource type="LabelSettings" id="LabelSettings_do3jr"]
+font_size = 40
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hboqi"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8ceqg"]
+bg_color = Color(0.65, 0.65, 0.65, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f3crt"]
+bg_color = Color(0.83137256, 0.83137256, 0.83137256, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_h5spr"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o001h"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_do3jr"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h5spr"]
+
+[node name="Main" type="Node2D" unique_id=2089512709]
+script = ExtResource("1_hboqi")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1180099124]
+
+[node name="Title" type="Label" parent="." unique_id=555526835]
+offset_left = -203.0
+offset_top = -323.0
+offset_right = 202.0
+offset_bottom = -235.0
+text = "Black Market"
+label_settings = SubResource("LabelSettings_o001h")
+
+[node name="Money" type="Label" parent="." unique_id=547217611]
+offset_left = -556.0
+offset_top = -297.0
+offset_right = -487.0
+offset_bottom = -242.0
+text = "$"
+label_settings = SubResource("LabelSettings_do3jr")
+
+[node name="Node2D" type="Node2D" parent="." unique_id=1271324679]
+script = ExtResource("2_8ceqg")
+
+[node name="Button" type="Button" parent="Node2D" unique_id=2023146580]
+offset_left = -465.0
+offset_top = -146.0
+offset_right = -247.0
+offset_bottom = -102.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0.043137256, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_hboqi")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_8ceqg")
+theme_override_styles/hover = SubResource("StyleBoxFlat_f3crt")
+text = "$25"
+
+[node name="Label" type="Label" parent="Node2D" unique_id=69984026]
+offset_left = -454.0
+offset_top = -175.0
+offset_right = -267.0
+offset_bottom = -147.0
+text = "More Stamina"
+label_settings = SubResource("LabelSettings_h5spr")
+horizontal_alignment = 1
+
+[node name="Node2D2" type="Node2D" parent="." unique_id=1011696369]
+script = ExtResource("3_f3crt")
+
+[node name="Button" type="Button" parent="Node2D2" unique_id=1855943446]
+offset_left = -104.0
+offset_top = -146.0
+offset_right = 114.0
+offset_bottom = -102.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0.043137256, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_hboqi")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_8ceqg")
+theme_override_styles/hover = SubResource("StyleBoxFlat_f3crt")
+text = "$25"
+
+[node name="Label" type="Label" parent="Node2D2" unique_id=1893599174]
+offset_left = -93.0
+offset_top = -175.0
+offset_right = 94.0
+offset_bottom = -147.0
+text = "Faster Stamina Recharge"
+label_settings = SubResource("LabelSettings_h5spr")
+horizontal_alignment = 1
+
+[node name="Node2D3" type="Node2D" parent="." unique_id=1241754334]
+
+[node name="Button" type="Button" parent="Node2D3" unique_id=2057889227]
+offset_left = 267.0
+offset_top = -146.0
+offset_right = 485.0
+offset_bottom = -102.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0.043137256, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_hboqi")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_8ceqg")
+theme_override_styles/hover = SubResource("StyleBoxFlat_f3crt")
+text = "Buy Now"
+
+[node name="Label" type="Label" parent="Node2D3" unique_id=1618342320]
+offset_left = 278.0
+offset_top = -175.0
+offset_right = 465.0
+offset_bottom = -147.0
+text = "More Stamina"
+label_settings = SubResource("LabelSettings_h5spr")
+horizontal_alignment = 1
+
+[node name="Node2D4" type="Node2D" parent="." unique_id=1776088550]
+
+[node name="Button" type="Button" parent="Node2D4" unique_id=293424405]
+offset_left = -466.0
+offset_top = 25.0
+offset_right = -248.0
+offset_bottom = 69.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0.043137256, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_hboqi")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_8ceqg")
+theme_override_styles/hover = SubResource("StyleBoxFlat_f3crt")
+text = "Buy Now"
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="Node2D4" unique_id=1398789774]
+offset_left = -455.0
+offset_top = -4.0
+offset_right = -268.0
+offset_bottom = 24.0
+text = "More Stamina"
+label_settings = SubResource("LabelSettings_h5spr")
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Node2D5" type="Node2D" parent="." unique_id=759984607]
+
+[node name="Button" type="Button" parent="Node2D5" unique_id=1220828447]
+offset_left = -105.0
+offset_top = 25.0
+offset_right = 113.0
+offset_bottom = 69.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0.043137256, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_hboqi")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_8ceqg")
+theme_override_styles/hover = SubResource("StyleBoxFlat_f3crt")
+text = "Buy Now"
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="Node2D5" unique_id=604733477]
+offset_left = -94.0
+offset_top = -4.0
+offset_right = 93.0
+offset_bottom = 24.0
+text = "More Stamina"
+label_settings = SubResource("LabelSettings_h5spr")
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Node2D6" type="Node2D" parent="." unique_id=1834858217]
+
+[node name="Button" type="Button" parent="Node2D6" unique_id=332496105]
+offset_left = 262.0
+offset_top = 25.0
+offset_right = 480.0
+offset_bottom = 69.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0.043137256, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_hboqi")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_8ceqg")
+theme_override_styles/hover = SubResource("StyleBoxFlat_f3crt")
+text = "Buy Now"
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="Node2D6" unique_id=1137917738]
+offset_left = 273.0
+offset_top = -4.0
+offset_right = 460.0
+offset_bottom = 24.0
+text = "More Stamina"
+label_settings = SubResource("LabelSettings_h5spr")
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Node2D7" type="Node2D" parent="." unique_id=2034614840]
+
+[node name="Button" type="Button" parent="Node2D7" unique_id=1123763085]
+offset_left = -466.0
+offset_top = 204.0
+offset_right = -248.0
+offset_bottom = 248.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0.043137256, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_hboqi")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_8ceqg")
+theme_override_styles/hover = SubResource("StyleBoxFlat_f3crt")
+text = "Buy Now"
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="Node2D7" unique_id=1297866786]
+offset_left = -455.0
+offset_top = 175.0
+offset_right = -268.0
+offset_bottom = 203.0
+text = "More Stamina"
+label_settings = SubResource("LabelSettings_h5spr")
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Node2D8" type="Node2D" parent="." unique_id=381210144]
+
+[node name="Button" type="Button" parent="Node2D8" unique_id=841864290]
+offset_left = -105.0
+offset_top = 204.0
+offset_right = 113.0
+offset_bottom = 248.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0.043137256, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_hboqi")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_8ceqg")
+theme_override_styles/hover = SubResource("StyleBoxFlat_f3crt")
+text = "Buy Now"
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="Node2D8" unique_id=1135259292]
+offset_left = -94.0
+offset_top = 175.0
+offset_right = 93.0
+offset_bottom = 203.0
+text = "More Stamina"
+label_settings = SubResource("LabelSettings_h5spr")
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Node2D9" type="Node2D" parent="." unique_id=2104052815]
+
+[node name="Button" type="Button" parent="Node2D9" unique_id=684787041]
+offset_left = 262.0
+offset_top = 204.0
+offset_right = 480.0
+offset_bottom = 248.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0.043137256, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_hboqi")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_8ceqg")
+theme_override_styles/hover = SubResource("StyleBoxFlat_f3crt")
+text = "Buy Now"
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="Node2D9" unique_id=681713063]
+offset_left = 273.0
+offset_top = 175.0
+offset_right = 460.0
+offset_bottom = 203.0
+text = "More Stamina"
+label_settings = SubResource("LabelSettings_h5spr")
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Button" type="Button" parent="." unique_id=870504028]
+offset_left = 452.0
+offset_top = -282.0
+offset_right = 531.0
+offset_bottom = -251.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_o001h")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_do3jr")
+theme_override_styles/hover = SubResource("StyleBoxFlat_h5spr")
+text = "Next Day"
+
+[connection signal="pressed" from="Node2D/Button" to="Node2D" method="_on_button_pressed"]
+[connection signal="pressed" from="Node2D2/Button" to="Node2D2" method="_on_button_pressed"]
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://neubpiingl7r"]
 
-[ext_resource type="Script" uid="uid://c13n0kr634f71" path="res://dig.gd" id="1_hc525"]
-[ext_resource type="Texture2D" uid="uid://bnbtdkk3b4t5t" path="res://dirt.png" id="1_x5t65"]
+[ext_resource type="Script" uid="uid://c13n0kr634f71" path="res://Scripts/dig.gd" id="1_hc525"]
+[ext_resource type="Texture2D" uid="uid://bnbtdkk3b4t5t" path="res://Sprites/dirt.png" id="1_x5t65"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o001h"]
 size = Vector2(396, 602)

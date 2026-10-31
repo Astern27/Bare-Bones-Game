@@ -15,6 +15,7 @@ func _process(delta: float) -> void:
 				$ProgressBar.visible = true
 				$ProgressBar.value -= .5
 				get_node("../../CanvasLayer/Stamina").value -= 1
+				player.get_node("Noise/CollisionShape2D").shape.radius = 2000
 				if $ProgressBar.value == 0:
 					$Sprite2D.visible = true
 					$ProgressBar.visible = false
