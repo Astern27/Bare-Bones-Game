@@ -1,6 +1,9 @@
 extends CharacterBody2D
 
 @onready var AnimatedSprite: AnimatedSprite2D = $AnimatedSprite2D
+static var bones = 0
+static var skulls = 0
+static var teeth = 0
 
 # Track the last direction the player faced (defaults to down)
 var current_direction: String = "down"
@@ -22,8 +25,8 @@ func _physics_process(delta: float) -> void:
 		velocity = Vector2.ZERO
 		
 	move_and_slide()
-	update_animation()
-	
+	update_animation(direction)
+
 func update_direction_string(input: Vector2) -> void:
 	if abs(input.x) > abs(input.y):
 		if input.x > 0:
@@ -36,8 +39,8 @@ func update_direction_string(input: Vector2) -> void:
 		else:
 			current_direction = "up"
 
-func update_animation() -> void:
-	if velocity == Vector2.ZERO:
+func update_animation(dir: Vector2) -> void:
+	if dir == Vector2.ZERO:
 		AnimatedSprite.play("idle_" + current_direction)
 	else:
 		AnimatedSprite.play("walk_" + current_direction)

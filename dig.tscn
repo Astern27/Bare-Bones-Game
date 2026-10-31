@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://neubpiingl7r"]
+
+[ext_resource type="Script" uid="uid://c13n0kr634f71" path="res://dig.gd" id="1_hc525"]
+[ext_resource type="Texture2D" uid="uid://bnbtdkk3b4t5t" path="res://dirt.png" id="1_x5t65"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o001h"]
+size = Vector2(396, 602)
+
+[node name="Dig" type="Node2D" unique_id=1378259505]
+script = ExtResource("1_hc525")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=120400187]
+scale = Vector2(1.9860768, 1.9860768)
+texture = ExtResource("1_x5t65")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1569835160]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1808206051]
+shape = SubResource("RectangleShape2D_o001h")
