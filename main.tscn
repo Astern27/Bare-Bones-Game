@@ -1600,6 +1600,9 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="LabelSettings" id="LabelSettings_lquwl"]
+font_size = 20
+
 [node name="Main" type="Node2D" unique_id=10467225]
 
 [node name="TileMap" type="TileMap" parent="." unique_id=1418558538]
@@ -1668,8 +1671,20 @@ scale = Vector2(0.06, 0.06)
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=146646989]
 
 [node name="Label" type="Label" parent="CanvasLayer" unique_id=446872950]
-offset_right = 40.0
+offset_right = 247.0
 offset_bottom = 23.0
+scale = Vector2(1.5, 1.5)
 size_flags_horizontal = 0
 size_flags_vertical = 0
-text = "Bones: 0  Skulls: 0  Teeth: 0"
+text = "Bones: 0  Skulls: 0  Gold Teeth: 0"
+label_settings = SubResource("LabelSettings_lquwl")
+
+[node name="Stamina" type="ProgressBar" parent="CanvasLayer" unique_id=1271830293]
+offset_left = 446.0
+offset_top = 577.0
+offset_right = 735.0
+offset_bottom = 642.0
+size_flags_horizontal = 4
+size_flags_vertical = 8
+value = 100.0
+show_percentage = false
