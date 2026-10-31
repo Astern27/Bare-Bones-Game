@@ -1,0 +1,28 @@
+extends Node2D
+
+@onready var player = get_node("../../Player")
+
+func _ready() -> void:
+	$Sprite2D.visible = false;
+	$ProgressBar.visible = false;
+	randomize()
+
+func _process(delta: float) -> void:
+	if (Input.is_action_pressed("Dig")):
+		var bodies = $Area2D.get_overlapping_bodies()
+		for body in bodies:
+			if body == player and !$Sprite2D.visible and get_node("../../CanvasLayer/Stamina").value >= 1:
+				$ProgressBar.visible = true
+				$ProgressBar.value -= .5
+				get_node("../../CanvasLayer/Stamina").value -= 1
+				if $ProgressBar.value == 0:
+					$Sprite2D.visible = true
+					$ProgressBar.visible = false
+					var chance = randi() % 20
+					if chance <= 10:
+						player.bones += (randi() % 4) + 3
+					elif chance <= 16:
+						player.skulls += (randi() % 2) + 1
+					else:
+						player.teeth += 1
+					get_node("../../CanvasLayer/Label").text = "Bones: " + str(player.bones) + "  Skulls: " + str(player.skulls) + "  Gold Teeth: " + str(player.teeth)
