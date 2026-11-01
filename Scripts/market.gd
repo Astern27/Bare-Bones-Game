@@ -7,7 +7,7 @@ static var money = 0
 func _ready() -> void:
 	money += Player.bones
 	money += Player.skulls * 10
-	money += Player.teeth * 50
+	money += Player.teeth * 25
 	$Money.text = "$" + str(money)
 
 
