@@ -141,7 +141,6 @@ func handle_patrol(_delta: float) -> void:
 
 	var target = patrol_points[target_point_index]
 	var direction = (target - global_position).normalized()
-	print(global_position)
 
 	velocity = direction * movement_speed
 	update_direction_string(direction)
