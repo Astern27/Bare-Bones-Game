@@ -1,0 +1,85 @@
+[gd_scene format=3 uid="uid://batk7l1cupfou"]
+
+[ext_resource type="FontFile" uid="uid://dh6vts7xelxy8" path="res://Sprites/PIXELART HALLOWEEN - TTF.ttf" id="1_lalqu"]
+[ext_resource type="Script" uid="uid://4ywylxg4mtkb" path="res://Scripts/play2.gd" id="2_0xeif"]
+[ext_resource type="Texture2D" uid="uid://e2ve8ena5nm2" path="res://Sprites/graveyard.png" id="3_0xeif"]
+[ext_resource type="Texture2D" uid="uid://dj5qxb7y8s7jl" path="res://Sprites/space.jpg" id="4_gdvy0"]
+[ext_resource type="Texture2D" uid="uid://cpxgpkccrjh5j" path="res://Sprites/shift.png" id="5_hga2d"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hga2d"]
+
+[node name="Main" type="Node2D" unique_id=183990895]
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=995776289]
+
+[node name="Button" type="Button" parent="." unique_id=240892420]
+z_index = 3
+offset_left = -86.0
+offset_top = 182.0
+offset_right = 83.0
+offset_bottom = 297.0
+theme_override_colors/font_pressed_color = Color(0.60784316, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0.9490196, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_lalqu")
+theme_override_font_sizes/font_size = 64
+text = "Play"
+flat = true
+script = ExtResource("2_0xeif")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=43942523]
+position = Vector2(-406, -200)
+texture = ExtResource("3_0xeif")
+region_enabled = true
+region_rect = Rect2(14.425907, 252.1521, 34.6989, 53.37854)
+
+[node name="Sprite2D2" type="Sprite2D" parent="." unique_id=471285978]
+position = Vector2(-341, -200)
+texture = ExtResource("3_0xeif")
+region_enabled = true
+region_rect = Rect2(25.806576, 414.2988, 88.20958, 53.37854)
+
+[node name="Label" type="Label" parent="." unique_id=1188176176]
+offset_left = -448.0
+offset_top = -170.0
+offset_right = -245.0
+offset_bottom = -107.0
+text = "Dig graves to get bones and other valuables"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Sprite2D3" type="Sprite2D" parent="." unique_id=801037634]
+position = Vector2(-363, -95)
+scale = Vector2(0.106944494, 0.10694447)
+texture = ExtResource("4_gdvy0")
+
+[node name="Line2D" type="Line2D" parent="." unique_id=865035480]
+position = Vector2(63, 20)
+points = PackedVector2Array(-235, -184, 5, -180, -13, -204, 9, -177, -9, -155)
+
+[node name="Stamina" type="ProgressBar" parent="." unique_id=1749200215]
+offset_left = 161.0
+offset_top = -207.0
+offset_right = 450.0
+offset_bottom = -142.0
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_styles/background = SubResource("StyleBoxFlat_hga2d")
+value = 50.0
+show_percentage = false
+
+[node name="Label2" type="Label" parent="." unique_id=1695875114]
+offset_left = 124.0
+offset_top = -136.0
+offset_right = 459.0
+offset_bottom = -61.0
+text = "Sprint to your destination
+Make sure to watch out for your stamina!"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Sprite2D4" type="Sprite2D" parent="." unique_id=1899774249]
+position = Vector2(301.06232, -50.374992)
+scale = Vector2(0.14081882, 0.14081882)
+texture = ExtResource("5_hga2d")
+
+[connection signal="pressed" from="Button" to="Button" method="_on_pressed"]

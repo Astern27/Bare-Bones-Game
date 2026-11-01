@@ -10,6 +10,7 @@ static var recharge = 1
 static var running = 1
 static var boots = 1
 @onready var stamina = get_node("../CanvasLayer/Stamina")
+static var level = 1
 
 # Track the last direction the player faced (defaults to down)
 var current_direction: String = "up"

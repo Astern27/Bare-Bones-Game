@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Bare Bones Game"
-run/main_scene="uid://2lndssh3oltj"
+run/main_scene="uid://c4kypjrkc4qfa"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://Sprites/icon.svg"
 
