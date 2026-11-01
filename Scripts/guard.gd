@@ -4,11 +4,13 @@ extends CharacterBody2D
 enum State { PATROL, LOOK_AROUND, CHASE }
 var current_state = State.PATROL
 var debug_timer: float = 0.0
+@export var stationary: bool = false
+@export var stat_pos: Vector2
 
 @export var patrol_points : Array[Vector2] = []
 
 @export var movement_speed : float = 50.0
-@export var chase_speed : float = 120.0
+@export var chase_speed : float = 100.0
 
 # Drag a Node2D here whose children are Marker2D nodes placed along the path
 @export var patrol_path: Node2D
@@ -53,10 +55,17 @@ func _ready() -> void:
 	if not patrol_points.is_empty():
 		global_position = patrol_points[starting_point]
 		target_point_index = starting_point % patrol_points.size()
-		
+	
+	if stationary:
+		global_position = stat_pos
+	
 	if debug:
 		print("[Guard] player_ref = ", player_ref)
 		print("[Guard] patrol points: ", patrol_points)
+	
+	if stationary:
+		current_state = State.LOOK_AROUND
+	print(global_position)
 
 
 func _physics_process(delta: float) -> void:
@@ -135,35 +144,49 @@ func start_chase() -> void:
 # --- STATES ---
 
 func handle_patrol(_delta: float) -> void:
-	if patrol_points.is_empty():
-		velocity = Vector2.ZERO
-		return
+	if stationary:
+		var direction = (stat_pos - global_position).normalized()
+		velocity =  direction * movement_speed
+		update_direction_string(direction)
+		vision_cone.rotation = direction.angle() - PI / 2
+		if global_position.distance_to(stat_pos) < 5.0:
+			velocity = Vector2.ZERO
+			current_state = State.LOOK_AROUND
+			look_timer = 2.0
+			look_base_rotation = vision_cone.rotation
+	else:
+		if patrol_points.is_empty():
+			velocity = Vector2.ZERO
+			return
 
-	var target = patrol_points[target_point_index]
-	var direction = (target - global_position).normalized()
+		var target = patrol_points[target_point_index]
+		var direction = (target - global_position).normalized()
 
-	velocity = direction * movement_speed
-	update_direction_string(direction)
-	vision_cone.rotation = direction.angle() - PI / 2
+		velocity = direction * movement_speed
+		update_direction_string(direction)
+		vision_cone.rotation = direction.angle() - PI / 2
 
-	if global_position.distance_to(target) < 5.0:
-		velocity = Vector2.ZERO
-		current_state = State.LOOK_AROUND
-		look_timer = 2.0
-		look_base_rotation = vision_cone.rotation
+		if global_position.distance_to(target) < 5.0:
+			velocity = Vector2.ZERO
+			current_state = State.LOOK_AROUND
+			look_timer = 2.0
+			look_base_rotation = vision_cone.rotation
 
 func handle_look_around(delta: float) -> void:
 	velocity = Vector2.ZERO
 	look_timer -= delta
-	if look_timer <= 0.0:
-		if not patrol_points.is_empty():
-			target_point_index = (target_point_index + 1) % patrol_points.size()
-			if debug:
-				print("[Guard] heading to P", target_point_index + 1, " at ", patrol_points[target_point_index])
-		current_state = State.PATROL
+	if stationary:
+		vision_cone.rotation += delta
 	else:
-		# Sweep around the original facing instead of drifting away from it
-		vision_cone.rotation = look_base_rotation + sin(Time.get_ticks_msec() * 0.005) * 0.6
+		if look_timer <= 0.0:
+			if not patrol_points.is_empty():
+				target_point_index = (target_point_index + 1) % patrol_points.size()
+				if debug:
+					print("[Guard] heading to P", target_point_index + 1, " at ", patrol_points[target_point_index])
+			current_state = State.PATROL
+		else:
+			# Sweep around the original facing instead of drifting away from it
+			vision_cone.rotation = look_base_rotation + sin(Time.get_ticks_msec() * 0.005) * 0.6
 
 func handle_chase(delta: float) -> void:
 	if not player_ref:
@@ -184,10 +207,13 @@ func handle_chase(delta: float) -> void:
 
 	if lose_sight_timer <= 0.0:
 		# Lost them: stop and look around before returning to patrol
-		velocity = Vector2.ZERO
-		current_state = State.LOOK_AROUND
-		look_timer = 2.0
-		look_base_rotation = vision_cone.rotation
+		if stationary:
+			current_state = State.PATROL
+		else:
+			velocity = Vector2.ZERO
+			current_state = State.LOOK_AROUND
+			look_timer = 2.0
+			look_base_rotation = vision_cone.rotation
 		return
 
 	var direction = (player_ref.global_position - global_position).normalized()

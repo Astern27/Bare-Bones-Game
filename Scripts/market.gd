@@ -20,4 +20,7 @@ func _ready() -> void:
 
 
 func _on_button_pressed() -> void:
-	get_tree().change_scene_to_file("res://Levels/main.tscn")
+	if Player.level <= 2:
+		get_tree().change_scene_to_file("res://Levels/level1.tscn")
+	elif Player.level <= 5:
+		get_tree().change_scene_to_file("res://Levels/level2.tscn")

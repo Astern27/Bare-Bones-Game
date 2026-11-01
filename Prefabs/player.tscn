@@ -3,8 +3,8 @@
 [ext_resource type="Script" uid="uid://bn0k8f3a8pns6" path="res://Scripts/player.gd" id="1_5wxv7"]
 [ext_resource type="Texture2D" uid="uid://b7c6t6t0ubej" path="res://Sprites/SpriteSheet.png" id="2_y5hcb"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_o001h"]
-size = Vector2(250.00015, 250.00021)
+[sub_resource type="CircleShape2D" id="CircleShape2D_avean"]
+radius = 140.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lquwl"]
 atlas = ExtResource("2_y5hcb")
@@ -185,7 +185,7 @@ script = ExtResource("1_5wxv7")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2070702545]
 position = Vector2(5.000011, 14.999939)
 scale = Vector2(0.9999989, 0.9999989)
-shape = SubResource("RectangleShape2D_o001h")
+shape = SubResource("CircleShape2D_avean")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=2057584241]
 scale = Vector2(9.999999, 9.999999)
