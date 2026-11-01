@@ -3,8 +3,9 @@
 [ext_resource type="Script" uid="uid://dwtlnbyn2bh8v" path="res://Scripts/guard.gd" id="1_avean"]
 [ext_resource type="Texture2D" uid="uid://dks3ecy45cg33" path="res://Sprites/Guard-Walk.png" id="1_stbbk"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_rffmb"]
-size = Vector2(22.625, 33.25)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_p0prn"]
+radius = 13.0
+height = 32.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_getpj"]
 atlas = ExtResource("1_stbbk")
@@ -165,7 +166,7 @@ animations = [{
 script = ExtResource("1_avean")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1537900154]
-shape = SubResource("RectangleShape2D_rffmb")
+shape = SubResource("CapsuleShape2D_p0prn")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=390865934]
 texture_filter = 1
