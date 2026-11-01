@@ -1469,7 +1469,14 @@ position = Vector2(10.999996, 310.99994)
 z_index = 1
 motion_mode = 1
 patrol_path = NodePath("../PatrolPath")
-levels = Array[int]([1])
+levels = Array[int]([1, 2])
+
+[node name="Guard2" parent="." unique_id=1494931835 node_paths=PackedStringArray("patrol_path") instance=ExtResource("4_7pswh")]
+z_index = 1
+motion_mode = 1
+patrol_path = NodePath("../PatrolPath")
+starting_point = 8
+levels = Array[int]([2])
 
 [node name="Dig Sites" type="Node2D" parent="." unique_id=1307790401]
 
@@ -1542,6 +1549,16 @@ scale = Vector2(1.5, 1.5)
 size_flags_horizontal = 0
 size_flags_vertical = 0
 text = "Bones: 0  Skulls: 0  Gold Teeth: 0"
+label_settings = SubResource("LabelSettings_lquwl")
+
+[node name="Label2" type="Label" parent="CanvasLayer" unique_id=427385971]
+offset_left = 1040.0
+offset_right = 1106.0
+offset_bottom = 28.0
+scale = Vector2(1.5, 1.5)
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "Day: 1"
 label_settings = SubResource("LabelSettings_lquwl")
 
 [node name="Stamina" type="ProgressBar" parent="CanvasLayer" unique_id=1271830293]

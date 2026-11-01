@@ -12,6 +12,7 @@ var debug_timer: float = 0.0
 
 # Drag a Node2D here whose children are Marker2D nodes placed along the path
 @export var patrol_path: Node2D
+@export var starting_point: int = 0
 
 # How close the guard must be to grab the player
 @export var catch_distance : float = 16.0
@@ -26,7 +27,7 @@ var debug_timer: float = 0.0
 @onready var vision_cone: Area2D = $VisionCone
 @onready var raycast: RayCast2D = $RayCast2D
 
-var target_point_index: int = 0
+var target_point_index: int = starting_point
 var look_timer: float = 0.0
 var look_base_rotation: float = 0.0
 var lose_sight_timer: float = 0.0
@@ -50,8 +51,8 @@ func _ready() -> void:
 	
 	# Start on the first marker and head for the second
 	if not patrol_points.is_empty():
-		global_position = patrol_points[0]
-		target_point_index = 1 % patrol_points.size()
+		global_position = patrol_points[starting_point]
+		target_point_index = starting_point % patrol_points.size()
 		
 	if debug:
 		print("[Guard] player_ref = ", player_ref)
