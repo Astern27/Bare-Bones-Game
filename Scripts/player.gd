@@ -22,6 +22,7 @@ func _ready() -> void:
 	bones = 0
 	skulls = 0
 	teeth = 0
+	get_node("../CanvasLayer/Label2").text = "Day " + str(level)
 
 func _physics_process(_delta: float) -> void:
 	var direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
@@ -69,4 +70,5 @@ func update_animation(dir: Vector2) -> void:
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body is Player:
+		level += 1
 		get_tree().call_deferred("change_scene_to_file", "res://Levels/market.tscn")
