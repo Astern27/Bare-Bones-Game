@@ -180,3 +180,7 @@ target_position = Vector2(-1, 62)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="VisionCone" unique_id=1733524107]
 polygon = PackedVector2Array(69, 120, 0, 0, -65, 120)
+
+[node name="Polygon2D" type="Polygon2D" parent="VisionCone" unique_id=674637177]
+color = Color(1, 0.023529412, 0, 0.3529412)
+polygon = PackedVector2Array(0, 0, -65, 120, 69, 120)
