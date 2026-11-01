@@ -1,125 +1,183 @@
 extends CharacterBody2D
 
-# Guard states: PATROL - LOOK AROUND - CHASE
+# Guard states: PATROL -> LOOK_AROUND -> CHASE
 enum State { PATROL, LOOK_AROUND, CHASE }
 var current_state: State = State.PATROL
 
-# Empty list to type coordinates for the guard's walking path
 @export var patrol_points : Array[Vector2] = []
 
-# Patrol and chase speeds
 @export var movement_speed : float = 50.0
 @export var chase_speed : float = 120.0
+
+# How close the guard must be to grab the player
+@export var catch_distance : float = 16.0
+# How close the player can be before the guard notices regardless of noise
+@export var close_range : float = 80.0
+# Seconds the guard keeps chasing after losing sight
+@export var lose_sight_time : float = 1.5
+# Turn on to print what the guard is thinking
+@export var debug : bool = false
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var vision_cone: Area2D = $VisionCone
 @onready var raycast: RayCast2D = $RayCast2D
 
 var target_point_index: int = 0
-var look_timer:  float = 0.0
+var look_timer: float = 0.0
+var look_base_rotation: float = 0.0
+var lose_sight_timer: float = 0.0
 var player_ref: CharacterBody2D = null
 var current_direction: String = "down"
 
 func _ready() -> void:
-	# Connect the VisionCone area signals to track when the player enters the field of view
-	vision_cone.body_entered.connect(_on_vision_cone_body_entered)
-	vision_cone.body_exited.connect(_on_vision_cone_body_exited)
 	sprite.play("idle_down")
+	player_ref = find_player()
+	if debug:
+		print("[Guard] player_ref = ", player_ref)
 
 func _physics_process(delta: float) -> void:
+	# Retry finding the player if it wasn't ready yet
+	if not player_ref:
+		player_ref = find_player()
+
 	match current_state:
 		State.PATROL:
+			check_for_player_detection()
 			handle_patrol(delta)
 		State.LOOK_AROUND:
+			check_for_player_detection()
 			handle_look_around(delta)
 		State.CHASE:
 			handle_chase(delta)
-			
+
 	move_and_slide()
 	update_animation()
 
-# --- STATE MANAGEMENT ---
+# --- FINDING THE PLAYER ---
 
-func handle_patrol(_delta: float) -> void:
-	if patrol_points.is_empty():
+func find_player() -> CharacterBody2D:
+	# Preferred: the "Player" group
+	var p = get_tree().get_first_node_in_group("Player")
+	if p:
+		return p
+	# Fallback: search the scene for a node using the Player class
+	var scene = get_tree().current_scene
+	if scene:
+		for n in scene.find_children("*", "CharacterBody2D", true, false):
+			if n is Player:
+				return n
+	return null
+
+# --- DETECTION ---
+
+# True if the player's Noise area is overlapping our vision cone right now.
+# Checked every frame, so it doesn't depend on enter/exit signals.
+func noise_is_in_sight() -> bool:
+	for area in vision_cone.get_overlapping_areas():
+		if area.name == "Noise" or area.is_in_group("PlayerNoise"):
+			return true
+	return false
+
+func check_for_player_detection() -> void:
+	if not player_ref:
 		return
-	
-	var target = patrol_points[target_point_index]
-	var direction = (target - global_position).normalized()
-	
-	velocity = direction * movement_speed
-	update_direction_string(direction)
-	
-	# Rotate the vision triangle to point in the exact direction the guard walks
-	vision_cone.rotation = direction.angle() - PI/2
-	
-	if global_position.distance_to(target) < 5.0:
-		velocity = Vector2.ZERO
-		current_state = State.LOOK_AROUND
-		look_timer = 2.0 # Pause and look around for 2 seconds
-
-func handle_look_around(delta: float) -> void:
-	look_timer -= delta
-	
-	if look_timer <= 0.0:
-		# Advance to the next coordinate point in the array loop
-		target_point_index = (target_point_index + 1) % patrol_points.size()
-		current_state = State.PATROL
-	else:
-		# Scan the vision cone back and forth subtly while standing still
-		vision_cone.rotation += sin(Time.get_ticks_msec() * 0.005) * 0.01
-
-func handle_chase(_delta: float) -> void:
-	if player_ref and can_see_player():
-		var direction = (player_ref.global_position - global_position).normalized()
-		velocity = direction * chase_speed
-		vision_cone.rotation = direction.angle() - PI/2
-		update_direction_string(direction)
-	else:
-		# Lost line of sight, return immediately to the patrol pattern
-		current_state = State.PATROL
-
-# --- SIGHT LINE VERIFICATION ---
+	var noisy = noise_is_in_sight()
+	var visible_now = can_see_player()
+	if debug:
+		print("[Guard] noise in sight: ", noisy, " | clear line: ", visible_now)
+	if noisy and visible_now:
+		start_chase()
 
 func can_see_player() -> bool:
 	if not player_ref:
 		return false
-	
-	# Aim the invisible laser beam directly at the player's center position
+
 	raycast.target_position = raycast.to_local(player_ref.global_position)
 	raycast.force_raycast_update()
-	
-	# Clear line of sight if it hits nothing or connects straight to the player (no walls in between)
-	if not raycast.is_colliding() or raycast.get_collider() == player_ref:
-		return true
-	
-	return false
 
-# --- SIGNAL DETECTORS ---
+	# Clear if nothing is hit, or the first thing hit is the player
+	return not raycast.is_colliding() or raycast.get_collider() == player_ref
 
-func _on_vision_cone_body_entered(body: Node2D) -> void:
-	if body.is_in_group("Player"):
-		player_ref = body
-		if can_see_player():
-			current_state = State.CHASE
+func start_chase() -> void:
+	current_state = State.CHASE
+	lose_sight_timer = lose_sight_time
 
-func _on_vision_cone_body_exited(body: Node2D) -> void:
-	if body == player_ref:
-		player_ref = null
+# --- STATES ---
 
-# --- DIRECTIONAL LOOKUP & ANIMATION ---
+func handle_patrol(_delta: float) -> void:
+	if patrol_points.is_empty():
+		velocity = Vector2.ZERO
+		return
+
+	var target = patrol_points[target_point_index]
+	var direction = (target - global_position).normalized()
+
+	velocity = direction * movement_speed
+	update_direction_string(direction)
+	vision_cone.rotation = direction.angle() - PI / 2
+
+	if global_position.distance_to(target) < 5.0:
+		velocity = Vector2.ZERO
+		current_state = State.LOOK_AROUND
+		look_timer = 2.0
+		look_base_rotation = vision_cone.rotation
+
+func handle_look_around(delta: float) -> void:
+	velocity = Vector2.ZERO
+	look_timer -= delta
+	if look_timer <= 0.0:
+		if not patrol_points.is_empty():
+			target_point_index = (target_point_index + 1) % patrol_points.size()
+		current_state = State.PATROL
+	else:
+		# Sweep around the original facing instead of drifting away from it
+		vision_cone.rotation = look_base_rotation + sin(Time.get_ticks_msec() * 0.005) * 0.6
+
+func handle_chase(delta: float) -> void:
+	if not player_ref:
+		current_state = State.PATROL
+		return
+
+	var dist = global_position.distance_to(player_ref.global_position)
+
+	# Caught the player
+	if dist <= catch_distance:
+		on_player_caught()
+		return
+
+	var sensed = noise_is_in_sight() or dist < close_range
+	if sensed and can_see_player():
+		lose_sight_timer = lose_sight_time
+	else:
+		lose_sight_timer -= delta
+
+	if lose_sight_timer <= 0.0:
+		# Lost them: stop and look around before returning to patrol
+		velocity = Vector2.ZERO
+		current_state = State.LOOK_AROUND
+		look_timer = 2.0
+		look_base_rotation = vision_cone.rotation
+		return
+
+	var direction = (player_ref.global_position - global_position).normalized()
+	velocity = direction * chase_speed
+	vision_cone.rotation = direction.angle() - PI / 2
+	update_direction_string(direction)
+
+func on_player_caught() -> void:
+	if debug:
+		print("[Guard] caught the player!")
+	# Player's _ready() resets bones/skulls/teeth, so reloading wipes the loot.
+	# Swap this for a game over scene if you make one.
+	get_tree().call_deferred("reload_current_scene")
+
+# --- DIRECTION & ANIMATION ---
 
 func update_direction_string(input: Vector2) -> void:
 	if abs(input.x) > abs(input.y):
-		if input.x > 0:
-			current_direction = "right"
-		else:
-			current_direction = "left"
+		current_direction = "right" if input.x > 0 else "left"
 	else:
-		if input.y > 0:
-			current_direction = "down"
-		else:
-			current_direction = "up"
+		current_direction = "down" if input.y > 0 else "up"
 
 func update_animation() -> void:
 	if velocity == Vector2.ZERO:
