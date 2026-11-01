@@ -1,6 +1,9 @@
+class_name Dig
 extends Node2D
 
 @onready var player = get_node("../../Player")
+static var shovel = 1
+static var silent = 1
 
 func _ready() -> void:
 	$Sprite2D.visible = false;
@@ -13,9 +16,9 @@ func _process(delta: float) -> void:
 		for body in bodies:
 			if body == player and !$Sprite2D.visible and get_node("../../CanvasLayer/Stamina").value >= 1:
 				$ProgressBar.visible = true
-				$ProgressBar.value -= .5
+				$ProgressBar.value -= .5 * shovel
 				get_node("../../CanvasLayer/Stamina").value -= 1
-				player.get_node("Noise/CollisionShape2D").shape.radius = 2000
+				player.get_node("Noise/CollisionShape2D").shape.radius = 2000 * silent
 				if $ProgressBar.value == 0:
 					$Sprite2D.visible = true
 					$ProgressBar.visible = false

@@ -7,13 +7,15 @@ static var skulls = 0
 static var teeth = 0
 static var max_stamina = 100;
 static var recharge = 1
+static var running = 1
+static var boots = 1
 @onready var stamina = get_node("../CanvasLayer/Stamina")
 
 # Track the last direction the player faced (defaults to down)
-var current_direction: String = "down"
+var current_direction: String = "up"
 
 func _ready() -> void:
-	AnimatedSprite.play("idle_down")
+	AnimatedSprite.play("idle_up")
 	stamina.max_value = max_stamina
 	stamina.value = max_stamina
 	bones = 0
@@ -25,12 +27,12 @@ func _physics_process(delta: float) -> void:
 	
 	if direction != Vector2.ZERO:
 		if Input.is_action_pressed("Sprint") and stamina.value > 0:
-			velocity = direction * 200
-			$Noise/CollisionShape2D.shape.radius = 2000
+			velocity = direction * 200 * running
+			$Noise/CollisionShape2D.shape.radius = 2000 * boots
 			stamina.value -= 1.7;
 		else:
-			velocity = direction * 80
-			$Noise/CollisionShape2D.shape.radius = 1000
+			velocity = direction * 80 * running
+			$Noise/CollisionShape2D.shape.radius = 1000 * boots
 			if stamina.value > 1:
 				stamina.value += .3 * recharge
 			
@@ -65,4 +67,5 @@ func update_animation(dir: Vector2) -> void:
 
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	get_tree().call_deferred("change_scene_to_file", "res://Levels/market.tscn")
+	if body is Player:
+		get_tree().call_deferred("change_scene_to_file", "res://Levels/market.tscn")
