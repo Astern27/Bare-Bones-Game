@@ -26,12 +26,18 @@ var player_ref: CharacterBody2D = null
 var current_direction: String = \"down\"
 
 func _ready() -> void:
-	# Connect the VisionCone area signals to track when the player enters the field of view
+	# Connect the VisionCone area signals to track when objects overlap his eyes
 	vision_cone.body_entered.connect(_on_vision_cone_body_entered)
 	vision_cone.body_exited.connect(_on_vision_cone_body_exited)
 	sprite.play(\"idle_down\")
+	
+	# Automatically find the player node via their group tag at launch
+	player_ref = get_tree().get_first_node_in_group(\"Player\")
 
 func _physics_process(delta: float) -> void:
+	# Continuously monitor vision and noise circles every physics tick
+	check_for_player_detection()
+
 	match current_state:
 		State.PATROL:
 			handle_patrol(delta)
@@ -42,6 +48,30 @@ func _physics_process(delta: float) -> void:
 			
 	move_and_slide()
 	update_animation()
+
+# --- DETECTION COGNITION ---
+
+func check_for_player_detection() -> void:
+	if not player_ref or current_state == State.CHASE:
+		return
+		
+	# 1. Standard Line-of-Sight Check (Is the player's physical body inside the vision cone directly?)
+	if vision_cone.overlaps_body(player_ref) and can_see_player():
+		current_state = State.CHASE
+		return
+		
+	# 2. Vision Cone Noise Intersection Check
+	# Check if the player's expanding noise circle is entering our guard's vision cone triangle
+	var noise_node = player_ref.get_node_or_null(\"Noise/CollisionShape2D\")
+	if noise_node and noise_node.shape is CircleShape2D:
+		var noise_radius = noise_node.shape.radius
+		var distance_to_player = global_position.distance_to(player_ref.global_position)
+		
+		# If the physical edge of the player's noise circle spans far enough to overlap the guard...
+		if distance_to_player <= noise_radius:
+			# ...AND the guard is currently looking in the player's direction (using our VisionCone check)
+			if is_player_in_guard_fov() and can_see_player():
+				current_state = State.CHASE
 
 # --- STATE MANAGEMENT ---
 
@@ -61,70 +91,76 @@ func handle_patrol(_delta: float) -> void:
 	if global_position.distance_to(target) < 5.0:
 		velocity = Vector2.ZERO
 		current_state = State.LOOK_AROUND
-		look_timer = 2.0 # Pause and look around for 2 seconds
+		look_timer = 2.0 
 
 func handle_look_around(delta: float) -> void:
 	look_timer -= delta
 	
 	if look_timer <= 0.0:
-		# Advance to the next coordinate point in the array loop
 		target_point_index = (target_point_index + 1) % patrol_points.size()
 		current_state = State.PATROL
 	else:
-		# Scan the vision cone back and forth subtly while standing still
 		vision_cone.rotation += sin(Time.get_ticks_msec() * 0.005) * 0.01
 
 func handle_chase(_delta: float) -> void:
-	if player_ref and can_see_player():
+	# Keep chasing as long as player is visible OR making enough noise within field of view
+	if player_ref and (can_see_player() or (is_player_audible() and is_player_in_guard_fov())):
 		var direction = (player_ref.global_position - global_position).normalized()
 		velocity = direction * chase_speed
 		vision_cone.rotation = direction.angle() - PI/2
 		update_direction_string(direction)
 	else:
-		# Lost line of sight, return immediately to the patrol pattern
 		current_state = State.PATROL
 
-# --- SIGHT LINE VERIFICATION ---
+# --- SIGHT & GEOMETRY VERIFICATION ---
 
 func can_see_player() -> bool:
 	if not player_ref:
 		return false
 	
-	# Aim the invisible laser beam directly at the player's center position
 	raycast.target_position = raycast.to_local(player_ref.global_position)
 	raycast.force_raycast_update()
 	
-	# Clear line of sight if it hits nothing or connects straight to the player (no walls in between)
 	if not raycast.is_colliding() or raycast.get_collider() == player_ref:
 		return true
 	
+	return false
+
+func is_player_in_guard_fov() -> bool:
+	# Mathematical check to see if the angle to the player falls inside the direction the vision cone is looking
+	var direction_to_player = (player_ref.global_position - global_position).angle()
+	# Align the angles since the vision cone is offset by -PI/2
+	var guard_facing_angle = vision_cone.rotation + PI/2
+	
+	var angle_difference = abs(angle_difference(guard_facing_angle, direction_to_player))
+	
+	# If the angle to the player is less than 45 degrees (0.785 rads) from where the guard faces, it's inside his FOV cone
+	return angle_difference < 0.785
+
+func is_player_audible() -> bool:
+	if not player_ref:
+		return false
+	var noise_node = player_ref.get_node_or_null(\"Noise/CollisionShape2D\")
+	if noise_node and noise_node.shape is CircleShape2D:
+		return global_position.distance_to(player_ref.global_position) <= noise_node.shape.radius
 	return false
 
 # --- SIGNAL DETECTORS ---
 
 func _on_vision_cone_body_entered(body: Node2D) -> void:
 	if body.is_in_group(\"Player\"):
-		player_ref = body
-		if can_see_player():
-			current_state = State.CHASE
+		pass # Logic handled dynamically inside check_for_player_detection framework now
 
 func _on_vision_cone_body_exited(body: Node2D) -> void:
-	if body == player_ref:
-		player_ref = null
+	pass
 
 # --- DIRECTIONAL LOOKUP & ANIMATION ---
 
 func update_direction_string(input: Vector2) -> void:
 	if abs(input.x) > abs(input.y):
-		if input.x > 0:
-			current_direction = \"right\"
-		else:
-			current_direction = \"left\"
+		current_direction = \"right\" if input.x > 0 else \"left\"
 	else:
-		if input.y > 0:
-			current_direction = \"down\"
-		else:
-			current_direction = \"up\"
+		current_direction = \"down\" if input.y > 0 else \"up\"
 
 func update_animation() -> void:
 	if velocity == Vector2.ZERO:
@@ -303,7 +339,7 @@ texture_filter = 1
 position = Vector2(229, -210)
 scale = Vector2(1, 0.8958333)
 sprite_frames = SubResource("SpriteFrames_rffmb")
-animation = &"idle_down"
+animation = &"walk_down"
 
 [node name="RayCast2D" type="RayCast2D" parent="." unique_id=1141905788]
 position = Vector2(229, -210)

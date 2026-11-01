@@ -195,7 +195,7 @@ texture_filter = 1
 position = Vector2(-2.499998, -7.500017)
 scale = Vector2(17.187498, 17.812498)
 sprite_frames = SubResource("SpriteFrames_3ubgv")
-animation = &"walk_up"
+animation = &"idle_down"
 
 [node name="Noise" type="Area2D" parent="." unique_id=1858667852]
 

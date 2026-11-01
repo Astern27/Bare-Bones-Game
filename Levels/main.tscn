@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://e2ve8ena5nm2" path="res://Sprites/graveyard.png" id="1_nj2yk"]
 [ext_resource type="Texture2D" uid="uid://c0w3ju7str2c3" path="res://Sprites/graveyard(2).png" id="2_7pswh"]
 [ext_resource type="PackedScene" uid="uid://b5dxfhyuq1b0u" path="res://Prefabs/player.tscn" id="3_34bfm"]
+[ext_resource type="PackedScene" uid="uid://csjfprmlar4f0" path="res://Prefabs/guard.tscn" id="4_7pswh"]
 [ext_resource type="PackedScene" uid="uid://neubpiingl7r" path="res://Prefabs/dig.tscn" id="4_ovrsl"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1bvp3"]
@@ -1462,6 +1463,9 @@ layer_2/tile_data = PackedInt32Array(1376288, 1769472, 11, 1441760, 1507328, 11,
 metadata/_edit_group_ = true
 
 [node name="Player" parent="." unique_id=1981730263 instance=ExtResource("3_34bfm")]
+
+[node name="Guard" parent="." unique_id=111662285 instance=ExtResource("4_7pswh")]
+z_index = 1
 
 [node name="Dig Sites" type="Node2D" parent="." unique_id=1307790401]
 

@@ -7,7 +7,7 @@ func _ready() -> void:
 	$ProgressBar.visible = false;
 	randomize()
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if (Input.is_action_pressed("Dig")):
 		var bodies = $Area2D.get_overlapping_bodies()
 		for body in bodies:

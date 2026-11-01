@@ -20,7 +20,7 @@ func _ready() -> void:
 	skulls = 0
 	teeth = 0
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	var direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	
 	if direction != Vector2.ZERO:
@@ -64,5 +64,5 @@ func update_animation(dir: Vector2) -> void:
 		AnimatedSprite.play("walk_" + current_direction)
 
 
-func _on_area_2d_body_entered(body: Node2D) -> void:
+func _on_area_2d_body_entered(_body: Node2D) -> void:
 	get_tree().call_deferred("change_scene_to_file", "res://Levels/market.tscn")
