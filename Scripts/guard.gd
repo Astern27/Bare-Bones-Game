@@ -65,7 +65,6 @@ func _ready() -> void:
 	
 	if stationary:
 		current_state = State.LOOK_AROUND
-	print(global_position)
 
 
 func _physics_process(delta: float) -> void:
