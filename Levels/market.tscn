@@ -3,6 +3,10 @@
 [ext_resource type="Script" uid="uid://csrvgnromk0y6" path="res://Scripts/market.gd" id="1_hboqi"]
 [ext_resource type="Script" uid="uid://b1i51cawhh1h" path="res://Scripts/slot1.gd" id="2_8ceqg"]
 [ext_resource type="Script" uid="uid://d1uyx7frp1bnp" path="res://Scripts/slot2.gd" id="3_f3crt"]
+[ext_resource type="Script" uid="uid://b6d5rk7pavafa" path="res://Scripts/slot3.gd" id="4_lk3jl"]
+[ext_resource type="Script" uid="uid://dexkjo0didcpp" path="res://Scripts/slot4.gd" id="5_qf2mk"]
+[ext_resource type="Script" uid="uid://dbyonr1ll217v" path="res://Scripts/slot5.gd" id="6_rj8lb"]
+[ext_resource type="Script" uid="uid://mld0ywerxjaw" path="res://Scripts/slot6.gd" id="7_14mu2"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_o001h"]
 font_size = 64
@@ -99,6 +103,7 @@ label_settings = SubResource("LabelSettings_h5spr")
 horizontal_alignment = 1
 
 [node name="Node2D3" type="Node2D" parent="." unique_id=1241754334]
+script = ExtResource("4_lk3jl")
 
 [node name="Button" type="Button" parent="Node2D3" unique_id=2057889227]
 offset_left = 267.0
@@ -111,18 +116,19 @@ theme_override_colors/font_hover_color = Color(0, 0.043137256, 0, 1)
 theme_override_styles/normal = SubResource("StyleBoxFlat_hboqi")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_8ceqg")
 theme_override_styles/hover = SubResource("StyleBoxFlat_f3crt")
-text = "Buy Now"
+text = "$50"
 
 [node name="Label" type="Label" parent="Node2D3" unique_id=1618342320]
 offset_left = 278.0
 offset_top = -175.0
 offset_right = 465.0
 offset_bottom = -147.0
-text = "More Stamina"
+text = "Running Shoes"
 label_settings = SubResource("LabelSettings_h5spr")
 horizontal_alignment = 1
 
 [node name="Node2D4" type="Node2D" parent="." unique_id=1776088550]
+script = ExtResource("5_qf2mk")
 
 [node name="Button" type="Button" parent="Node2D4" unique_id=293424405]
 offset_left = -466.0
@@ -135,7 +141,7 @@ theme_override_colors/font_hover_color = Color(0, 0.043137256, 0, 1)
 theme_override_styles/normal = SubResource("StyleBoxFlat_hboqi")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_8ceqg")
 theme_override_styles/hover = SubResource("StyleBoxFlat_f3crt")
-text = "Buy Now"
+text = "$50"
 metadata/_edit_use_anchors_ = true
 
 [node name="Label" type="Label" parent="Node2D4" unique_id=1398789774]
@@ -143,12 +149,13 @@ offset_left = -455.0
 offset_top = -4.0
 offset_right = -268.0
 offset_bottom = 24.0
-text = "More Stamina"
+text = "Better Shovel"
 label_settings = SubResource("LabelSettings_h5spr")
 horizontal_alignment = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="Node2D5" type="Node2D" parent="." unique_id=759984607]
+script = ExtResource("6_rj8lb")
 
 [node name="Button" type="Button" parent="Node2D5" unique_id=1220828447]
 offset_left = -105.0
@@ -161,7 +168,7 @@ theme_override_colors/font_hover_color = Color(0, 0.043137256, 0, 1)
 theme_override_styles/normal = SubResource("StyleBoxFlat_hboqi")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_8ceqg")
 theme_override_styles/hover = SubResource("StyleBoxFlat_f3crt")
-text = "Buy Now"
+text = "$50"
 metadata/_edit_use_anchors_ = true
 
 [node name="Label" type="Label" parent="Node2D5" unique_id=604733477]
@@ -169,12 +176,13 @@ offset_left = -94.0
 offset_top = -4.0
 offset_right = 93.0
 offset_bottom = 24.0
-text = "More Stamina"
+text = "Quiet Boots"
 label_settings = SubResource("LabelSettings_h5spr")
 horizontal_alignment = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="Node2D6" type="Node2D" parent="." unique_id=1834858217]
+script = ExtResource("7_14mu2")
 
 [node name="Button" type="Button" parent="Node2D6" unique_id=332496105]
 offset_left = 262.0
@@ -187,7 +195,7 @@ theme_override_colors/font_hover_color = Color(0, 0.043137256, 0, 1)
 theme_override_styles/normal = SubResource("StyleBoxFlat_hboqi")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_8ceqg")
 theme_override_styles/hover = SubResource("StyleBoxFlat_f3crt")
-text = "Buy Now"
+text = "$75"
 metadata/_edit_use_anchors_ = true
 
 [node name="Label" type="Label" parent="Node2D6" unique_id=1137917738]
@@ -195,7 +203,7 @@ offset_left = 273.0
 offset_top = -4.0
 offset_right = 460.0
 offset_bottom = 24.0
-text = "More Stamina"
+text = "Silencer"
 label_settings = SubResource("LabelSettings_h5spr")
 horizontal_alignment = 1
 metadata/_edit_use_anchors_ = true
@@ -293,4 +301,8 @@ text = "Next Day"
 
 [connection signal="pressed" from="Node2D/Button" to="Node2D" method="_on_button_pressed"]
 [connection signal="pressed" from="Node2D2/Button" to="Node2D2" method="_on_button_pressed"]
+[connection signal="pressed" from="Node2D3/Button" to="Node2D3" method="_on_button_pressed"]
+[connection signal="pressed" from="Node2D4/Button" to="Node2D4" method="_on_button_pressed"]
+[connection signal="pressed" from="Node2D5/Button" to="Node2D5" method="_on_button_pressed"]
+[connection signal="pressed" from="Node2D6/Button" to="Node2D6" method="_on_button_pressed"]
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
