@@ -2,12 +2,16 @@ class_name Market
 extends Node2D
 
 static var money = 0
+static var score = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	money += Player.bones
 	money += Player.skulls * 10
 	money += Player.teeth * 25
+	score += Player.bones
+	score += Player.skulls * 10
+	score += Player.teeth * 25
 	$Money.text = "$" + str(money)
 
 

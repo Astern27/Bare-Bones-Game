@@ -33,7 +33,11 @@ var lose_sight_timer: float = 0.0
 var player_ref: CharacterBody2D = null
 var current_direction: String = "down"
 
+@export var levels : Array[int] = []
+
 func _ready() -> void:
+	if levels.find(Player.level) == -1:
+		queue_free()
 	sprite.play("idle_down")
 	player_ref = find_player()
 
