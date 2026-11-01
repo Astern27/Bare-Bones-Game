@@ -17,6 +17,8 @@ func _ready() -> void:
 	money = int(round(money))
 	$Money.text = "$" + str(money)
 	Player.level += 1
+	if Player.level == 8:
+		get_tree().change_scene_to_file("res://Levels/end.tscn")
 
 
 func _on_button_pressed() -> void:
@@ -24,3 +26,5 @@ func _on_button_pressed() -> void:
 		get_tree().change_scene_to_file("res://Levels/level1.tscn")
 	elif Player.level <= 5:
 		get_tree().change_scene_to_file("res://Levels/level2.tscn")
+	elif Player.level <= 7:
+		get_tree().change_scene_to_file("res://Levels/level3.tscn")

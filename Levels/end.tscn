@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://dr2nfrrm5ky1k"]
+
+[ext_resource type="FontFile" uid="uid://dh6vts7xelxy8" path="res://Sprites/PIXELART HALLOWEEN - TTF.ttf" id="1_jh32d"]
+[ext_resource type="Script" uid="uid://c3wl7u2l43mg8" path="res://Scripts/end.gd" id="1_kalj3"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_o001h"]
+font = ExtResource("1_jh32d")
+font_size = 100
+
+[sub_resource type="LabelSettings" id="LabelSettings_do3jr"]
+font = ExtResource("1_jh32d")
+font_size = 32
+
+[node name="Main" type="Node2D" unique_id=1874539734]
+script = ExtResource("1_kalj3")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=783683057]
+
+[node name="Label" type="Label" parent="." unique_id=869671276]
+offset_left = -217.0
+offset_top = -226.0
+offset_right = 265.0
+offset_bottom = -58.0
+text = "The End"
+label_settings = SubResource("LabelSettings_o001h")
+
+[node name="Label2" type="Label" parent="." unique_id=569859433]
+offset_left = -239.0
+offset_top = 3.0
+offset_right = 281.0
+offset_bottom = 114.0
+text = "Total Money Made: $0
+Total Gravestones Robbed: 0"
+label_settings = SubResource("LabelSettings_do3jr")
+horizontal_alignment = 1
