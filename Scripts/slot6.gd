@@ -6,8 +6,8 @@ func _ready() -> void:
 	visible = v
 
 func _on_button_pressed() -> void:
-	if Market.money >= 75:
-		Market.money -= 75
+	if Market.money >= 100:
+		Market.money -= 100
 		Dig.silent *= 0.7
 		get_node("../Money").text = "$" + str(Market.money)
 		visible = false

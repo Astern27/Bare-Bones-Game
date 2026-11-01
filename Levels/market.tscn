@@ -118,7 +118,7 @@ theme_override_colors/font_hover_color = Color(0, 0.043137256, 0, 1)
 theme_override_styles/normal = SubResource("StyleBoxFlat_hboqi")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_8ceqg")
 theme_override_styles/hover = SubResource("StyleBoxFlat_f3crt")
-text = "$50"
+text = "$75"
 
 [node name="Label" type="Label" parent="Node2D3" unique_id=1618342320]
 offset_left = 278.0
@@ -170,7 +170,7 @@ theme_override_colors/font_hover_color = Color(0, 0.043137256, 0, 1)
 theme_override_styles/normal = SubResource("StyleBoxFlat_hboqi")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_8ceqg")
 theme_override_styles/hover = SubResource("StyleBoxFlat_f3crt")
-text = "$50"
+text = "$75"
 metadata/_edit_use_anchors_ = true
 
 [node name="Label" type="Label" parent="Node2D5" unique_id=604733477]
@@ -197,7 +197,7 @@ theme_override_colors/font_hover_color = Color(0, 0.043137256, 0, 1)
 theme_override_styles/normal = SubResource("StyleBoxFlat_hboqi")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_8ceqg")
 theme_override_styles/hover = SubResource("StyleBoxFlat_f3crt")
-text = "$75"
+text = "$100"
 metadata/_edit_use_anchors_ = true
 
 [node name="Label" type="Label" parent="Node2D6" unique_id=1137917738]
