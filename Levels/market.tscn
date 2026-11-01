@@ -214,9 +214,9 @@ metadata/_edit_use_anchors_ = true
 script = ExtResource("8_2uril")
 
 [node name="Button" type="Button" parent="Node2D7" unique_id=1123763085]
-offset_left = -466.0
+offset_left = -283.0
 offset_top = 204.0
-offset_right = -248.0
+offset_right = -65.0
 offset_bottom = 248.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
@@ -228,9 +228,9 @@ text = "$125"
 metadata/_edit_use_anchors_ = true
 
 [node name="Label" type="Label" parent="Node2D7" unique_id=1297866786]
-offset_left = -455.0
+offset_left = -272.0
 offset_top = 175.0
-offset_right = -268.0
+offset_right = -85.0
 offset_bottom = 203.0
 text = "Lucky Charm"
 label_settings = SubResource("LabelSettings_h5spr")
@@ -241,9 +241,9 @@ metadata/_edit_use_anchors_ = true
 script = ExtResource("9_1o5wd")
 
 [node name="Button" type="Button" parent="Node2D8" unique_id=841864290]
-offset_left = -105.0
+offset_left = 86.0
 offset_top = 204.0
-offset_right = 113.0
+offset_right = 304.0
 offset_bottom = 248.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
@@ -255,37 +255,11 @@ text = "$150"
 metadata/_edit_use_anchors_ = true
 
 [node name="Label" type="Label" parent="Node2D8" unique_id=1135259292]
-offset_left = -94.0
+offset_left = 97.0
 offset_top = 175.0
-offset_right = 93.0
+offset_right = 284.0
 offset_bottom = 203.0
 text = "Money Multiplier"
-label_settings = SubResource("LabelSettings_h5spr")
-horizontal_alignment = 1
-metadata/_edit_use_anchors_ = true
-
-[node name="Node2D9" type="Node2D" parent="." unique_id=2104052815]
-
-[node name="Button" type="Button" parent="Node2D9" unique_id=684787041]
-offset_left = 262.0
-offset_top = 204.0
-offset_right = 480.0
-offset_bottom = 248.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_color = Color(0, 0.043137256, 0, 1)
-theme_override_styles/normal = SubResource("StyleBoxFlat_hboqi")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_8ceqg")
-theme_override_styles/hover = SubResource("StyleBoxFlat_f3crt")
-text = "Buy Now"
-metadata/_edit_use_anchors_ = true
-
-[node name="Label" type="Label" parent="Node2D9" unique_id=681713063]
-offset_left = 273.0
-offset_top = 175.0
-offset_right = 460.0
-offset_bottom = 203.0
-text = "???"
 label_settings = SubResource("LabelSettings_h5spr")
 horizontal_alignment = 1
 metadata/_edit_use_anchors_ = true
