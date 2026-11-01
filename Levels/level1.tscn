@@ -1552,9 +1552,13 @@ text = "Bones: 0  Skulls: 0  Gold Teeth: 0"
 label_settings = SubResource("LabelSettings_lquwl")
 
 [node name="Label2" type="Label" parent="CanvasLayer" unique_id=427385971]
-offset_left = 1040.0
-offset_right = 1106.0
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -99.0
+offset_right = -33.0
 offset_bottom = 28.0
+grow_horizontal = 0
 scale = Vector2(1.5, 1.5)
 size_flags_horizontal = 0
 size_flags_vertical = 0
@@ -1562,10 +1566,17 @@ text = "Day: 1"
 label_settings = SubResource("LabelSettings_lquwl")
 
 [node name="Stamina" type="ProgressBar" parent="CanvasLayer" unique_id=1271830293]
-offset_left = 446.0
-offset_top = 577.0
-offset_right = 735.0
-offset_bottom = 642.0
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -144.5
+offset_top = -83.0
+offset_right = 144.5
+offset_bottom = -18.0
+grow_horizontal = 2
+grow_vertical = 0
 size_flags_horizontal = 4
 size_flags_vertical = 8
 value = 100.0
