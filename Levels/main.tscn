@@ -1463,10 +1463,12 @@ layer_2/tile_data = PackedInt32Array(1376288, 1769472, 11, 1441760, 1507328, 11,
 metadata/_edit_group_ = true
 
 [node name="Player" parent="." unique_id=1981730263 instance=ExtResource("3_34bfm")]
-position = Vector2(8, 318)
+position = Vector2(-50.999977, -62.000015)
 
-[node name="Guard" parent="." unique_id=111662285 instance=ExtResource("4_7pswh")]
+[node name="Guard" parent="." unique_id=111662285 node_paths=PackedStringArray("patrol_path") instance=ExtResource("4_7pswh")]
 z_index = 1
+motion_mode = 1
+patrol_path = NodePath("../PatrolPath")
 
 [node name="Dig Sites" type="Node2D" parent="." unique_id=1307790401]
 
@@ -1533,8 +1535,8 @@ scale = Vector2(0.07, 0.07)
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=146646989]
 
 [node name="Label" type="Label" parent="CanvasLayer" unique_id=446872950]
-offset_right = 247.0
-offset_bottom = 23.0
+offset_right = 308.0
+offset_bottom = 28.0
 scale = Vector2(1.5, 1.5)
 size_flags_horizontal = 0
 size_flags_vertical = 0
@@ -1556,5 +1558,43 @@ show_percentage = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1116006901]
 position = Vector2(8.5, 377)
 shape = SubResource("RectangleShape2D_o001h")
+
+[node name="PatrolPath" type="Node2D" parent="." unique_id=1471011217]
+
+[node name="P1" type="Marker2D" parent="PatrolPath" unique_id=707394774]
+position = Vector2(229, -210)
+
+[node name="P2" type="Marker2D" parent="PatrolPath" unique_id=1920672547]
+position = Vector2(230, -86)
+
+[node name="P3" type="Marker2D" parent="PatrolPath" unique_id=950494418]
+position = Vector2(405, -84)
+
+[node name="P4" type="Marker2D" parent="PatrolPath" unique_id=483081776]
+position = Vector2(407, 88)
+
+[node name="P5" type="Marker2D" parent="PatrolPath" unique_id=1286866054]
+position = Vector2(201, 91)
+
+[node name="P6" type="Marker2D" parent="PatrolPath" unique_id=857778699]
+position = Vector2(200, 246)
+
+[node name="P7" type="Marker2D" parent="PatrolPath" unique_id=1463165391]
+position = Vector2(-153, 247)
+
+[node name="P8" type="Marker2D" parent="PatrolPath" unique_id=836323476]
+position = Vector2(-155, 171)
+
+[node name="P9" type="Marker2D" parent="PatrolPath" unique_id=285493091]
+position = Vector2(-345, 168)
+
+[node name="P10" type="Marker2D" parent="PatrolPath" unique_id=814247180]
+position = Vector2(-344, -70)
+
+[node name="P11" type="Marker2D" parent="PatrolPath" unique_id=1328779326]
+position = Vector2(-170, -72)
+
+[node name="P12" type="Marker2D" parent="PatrolPath" unique_id=1087000708]
+position = Vector2(-166, -215)
 
 [connection signal="body_entered" from="Area2D" to="Player" method="_on_area_2d_body_entered"]

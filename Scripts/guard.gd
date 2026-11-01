@@ -2,12 +2,16 @@ extends CharacterBody2D
 
 # Guard states: PATROL -> LOOK_AROUND -> CHASE
 enum State { PATROL, LOOK_AROUND, CHASE }
-var current_state = "Patrol"
+var current_state = State.PATROL
+var debug_timer: float = 0.0
 
 @export var patrol_points : Array[Vector2] = []
 
 @export var movement_speed : float = 50.0
 @export var chase_speed : float = 120.0
+
+# Drag a Node2D here whose children are Marker2D nodes placed along the path
+@export var patrol_path: Node2D
 
 # How close the guard must be to grab the player
 @export var catch_distance : float = 16.0
@@ -32,23 +36,43 @@ var current_direction: String = "down"
 func _ready() -> void:
 	sprite.play("idle_down")
 	player_ref = find_player()
+
+	# Build the patrol route from the marker positions
+	if patrol_path:
+		patrol_points.clear()
+		for child in patrol_path.get_children():
+			if child is Marker2D:
+				patrol_points.append(child.global_position)
+	
+	# Start on the first marker and head for the second
+	if not patrol_points.is_empty():
+		global_position = patrol_points[0]
+		target_point_index = 1 % patrol_points.size()
+		
 	if debug:
 		print("[Guard] player_ref = ", player_ref)
+		print("[Guard] patrol points: ", patrol_points)
 
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
+	if debug:
+		debug_timer -= delta
+		if debug_timer <= 0.0:
+			debug_timer = 1.0
+			var tgt = patrol_points[target_point_index] if not patrol_points.is_empty() else Vector2.ZERO
+			print("[Guard] ", State.keys()[current_state], " pos=", global_position.round(), " target=", tgt)
 	# Retry finding the player if it wasn't ready yet
 	if not player_ref:
 		player_ref = find_player()
 
 	match current_state:
-		"Patrol":
+		State.PATROL:
 			check_for_player_detection()
 			handle_patrol(delta)
-		"Look Around":
+		State.LOOK_AROUND:
 			check_for_player_detection()
 			handle_look_around(delta)
-		"Chase":
+		State.CHASE:
 			handle_chase(delta)
 
 	move_and_slide()
@@ -76,7 +100,6 @@ func find_player() -> CharacterBody2D:
 func noise_is_in_sight() -> bool:
 	for area in vision_cone.get_overlapping_areas():
 		if area.name == "Noise":
-			print("AAAAAAAAA")
 			return true
 	return false
 
@@ -101,7 +124,7 @@ func can_see_player() -> bool:
 	return not raycast.is_colliding() or raycast.get_collider() == player_ref
 
 func start_chase() -> void:
-	current_state = "Chase"
+	current_state = State.CHASE
 	lose_sight_timer = lose_sight_time
 
 # --- STATES ---
@@ -113,6 +136,7 @@ func handle_patrol(_delta: float) -> void:
 
 	var target = patrol_points[target_point_index]
 	var direction = (target - global_position).normalized()
+	print(global_position)
 
 	velocity = direction * movement_speed
 	update_direction_string(direction)
@@ -120,7 +144,7 @@ func handle_patrol(_delta: float) -> void:
 
 	if global_position.distance_to(target) < 5.0:
 		velocity = Vector2.ZERO
-		current_state = "Look Around"
+		current_state = State.LOOK_AROUND
 		look_timer = 2.0
 		look_base_rotation = vision_cone.rotation
 
@@ -130,14 +154,16 @@ func handle_look_around(delta: float) -> void:
 	if look_timer <= 0.0:
 		if not patrol_points.is_empty():
 			target_point_index = (target_point_index + 1) % patrol_points.size()
-		current_state = "Patrol"
+			if debug:
+				print("[Guard] heading to P", target_point_index + 1, " at ", patrol_points[target_point_index])
+		current_state = State.PATROL
 	else:
 		# Sweep around the original facing instead of drifting away from it
 		vision_cone.rotation = look_base_rotation + sin(Time.get_ticks_msec() * 0.005) * 0.6
 
 func handle_chase(delta: float) -> void:
 	if not player_ref:
-		current_state = "Patrol"
+		current_state = State.PATROL
 		return
 
 	var dist = global_position.distance_to(player_ref.global_position)
@@ -155,7 +181,7 @@ func handle_chase(delta: float) -> void:
 	if lose_sight_timer <= 0.0:
 		# Lost them: stop and look around before returning to patrol
 		velocity = Vector2.ZERO
-		current_state = "Look Around"
+		current_state = State.LOOK_AROUND
 		look_timer = 2.0
 		look_base_rotation = vision_cone.rotation
 		return
