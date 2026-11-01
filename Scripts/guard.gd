@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 # Guard states: PATROL -> LOOK_AROUND -> CHASE
 enum State { PATROL, LOOK_AROUND, CHASE }
-var current_state: State = State.PATROL
+var current_state = "Patrol"
 
 @export var patrol_points : Array[Vector2] = []
 
@@ -35,19 +35,20 @@ func _ready() -> void:
 	if debug:
 		print("[Guard] player_ref = ", player_ref)
 
-func _physics_process(delta: float) -> void:
+
+func _process(delta: float) -> void:
 	# Retry finding the player if it wasn't ready yet
 	if not player_ref:
 		player_ref = find_player()
 
 	match current_state:
-		State.PATROL:
+		"Patrol":
 			check_for_player_detection()
 			handle_patrol(delta)
-		State.LOOK_AROUND:
+		"Look Around":
 			check_for_player_detection()
 			handle_look_around(delta)
-		State.CHASE:
+		"Chase":
 			handle_chase(delta)
 
 	move_and_slide()
@@ -74,7 +75,8 @@ func find_player() -> CharacterBody2D:
 # Checked every frame, so it doesn't depend on enter/exit signals.
 func noise_is_in_sight() -> bool:
 	for area in vision_cone.get_overlapping_areas():
-		if area.name == "Noise" or area.is_in_group("PlayerNoise"):
+		if area.name == "Noise":
+			print("AAAAAAAAA")
 			return true
 	return false
 
@@ -85,7 +87,7 @@ func check_for_player_detection() -> void:
 	var visible_now = can_see_player()
 	if debug:
 		print("[Guard] noise in sight: ", noisy, " | clear line: ", visible_now)
-	if noisy and visible_now:
+	if noisy:
 		start_chase()
 
 func can_see_player() -> bool:
@@ -99,7 +101,7 @@ func can_see_player() -> bool:
 	return not raycast.is_colliding() or raycast.get_collider() == player_ref
 
 func start_chase() -> void:
-	current_state = State.CHASE
+	current_state = "Chase"
 	lose_sight_timer = lose_sight_time
 
 # --- STATES ---
@@ -118,7 +120,7 @@ func handle_patrol(_delta: float) -> void:
 
 	if global_position.distance_to(target) < 5.0:
 		velocity = Vector2.ZERO
-		current_state = State.LOOK_AROUND
+		current_state = "Look Around"
 		look_timer = 2.0
 		look_base_rotation = vision_cone.rotation
 
@@ -128,14 +130,14 @@ func handle_look_around(delta: float) -> void:
 	if look_timer <= 0.0:
 		if not patrol_points.is_empty():
 			target_point_index = (target_point_index + 1) % patrol_points.size()
-		current_state = State.PATROL
+		current_state = "Patrol"
 	else:
 		# Sweep around the original facing instead of drifting away from it
 		vision_cone.rotation = look_base_rotation + sin(Time.get_ticks_msec() * 0.005) * 0.6
 
 func handle_chase(delta: float) -> void:
 	if not player_ref:
-		current_state = State.PATROL
+		current_state = "Patrol"
 		return
 
 	var dist = global_position.distance_to(player_ref.global_position)
@@ -145,8 +147,7 @@ func handle_chase(delta: float) -> void:
 		on_player_caught()
 		return
 
-	var sensed = noise_is_in_sight() or dist < close_range
-	if sensed and can_see_player():
+	if noise_is_in_sight():
 		lose_sight_timer = lose_sight_time
 	else:
 		lose_sight_timer -= delta
@@ -154,7 +155,7 @@ func handle_chase(delta: float) -> void:
 	if lose_sight_timer <= 0.0:
 		# Lost them: stop and look around before returning to patrol
 		velocity = Vector2.ZERO
-		current_state = State.LOOK_AROUND
+		current_state = "Look Around"
 		look_timer = 2.0
 		look_base_rotation = vision_cone.rotation
 		return
