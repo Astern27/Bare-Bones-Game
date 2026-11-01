@@ -15,7 +15,7 @@ var debug_timer: float = 0.0
 @export var starting_point: int = 0
 
 # How close the guard must be to grab the player
-@export var catch_distance : float = 16.0
+@export var catch_distance : float = 35.0
 # How close the player can be before the guard notices regardless of noise
 @export var close_range : float = 80.0
 # Seconds the guard keeps chasing after losing sight
@@ -201,7 +201,8 @@ func on_player_caught() -> void:
 		print("[Guard] caught the player!")
 	# Player's _ready() resets bones/skulls/teeth, so reloading wipes the loot.
 	# Swap this for a game over scene if you make one.
-	get_tree().call_deferred("reload_current_scene")
+	Market.caught = .5
+	get_tree().call_deferred("change_scene_to_file", "res://Levels/market.tscn")
 
 # --- DIRECTION & ANIMATION ---
 

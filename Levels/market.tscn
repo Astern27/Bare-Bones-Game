@@ -7,6 +7,8 @@
 [ext_resource type="Script" uid="uid://dexkjo0didcpp" path="res://Scripts/slot4.gd" id="5_qf2mk"]
 [ext_resource type="Script" uid="uid://dbyonr1ll217v" path="res://Scripts/slot5.gd" id="6_rj8lb"]
 [ext_resource type="Script" uid="uid://mld0ywerxjaw" path="res://Scripts/slot6.gd" id="7_14mu2"]
+[ext_resource type="Script" uid="uid://b51e8h3ndbxcv" path="res://Scripts/slot7.gd" id="8_2uril"]
+[ext_resource type="Script" uid="uid://bxmvfhqx5bvsi" path="res://Scripts/slot8.gd" id="9_1o5wd"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_o001h"]
 font_size = 64
@@ -209,6 +211,7 @@ horizontal_alignment = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="Node2D7" type="Node2D" parent="." unique_id=2034614840]
+script = ExtResource("8_2uril")
 
 [node name="Button" type="Button" parent="Node2D7" unique_id=1123763085]
 offset_left = -466.0
@@ -221,7 +224,7 @@ theme_override_colors/font_hover_color = Color(0, 0.043137256, 0, 1)
 theme_override_styles/normal = SubResource("StyleBoxFlat_hboqi")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_8ceqg")
 theme_override_styles/hover = SubResource("StyleBoxFlat_f3crt")
-text = "Buy Now"
+text = "$125"
 metadata/_edit_use_anchors_ = true
 
 [node name="Label" type="Label" parent="Node2D7" unique_id=1297866786]
@@ -229,12 +232,13 @@ offset_left = -455.0
 offset_top = 175.0
 offset_right = -268.0
 offset_bottom = 203.0
-text = "More Stamina"
+text = "Lucky Charm"
 label_settings = SubResource("LabelSettings_h5spr")
 horizontal_alignment = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="Node2D8" type="Node2D" parent="." unique_id=381210144]
+script = ExtResource("9_1o5wd")
 
 [node name="Button" type="Button" parent="Node2D8" unique_id=841864290]
 offset_left = -105.0
@@ -247,7 +251,7 @@ theme_override_colors/font_hover_color = Color(0, 0.043137256, 0, 1)
 theme_override_styles/normal = SubResource("StyleBoxFlat_hboqi")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_8ceqg")
 theme_override_styles/hover = SubResource("StyleBoxFlat_f3crt")
-text = "Buy Now"
+text = "$150"
 metadata/_edit_use_anchors_ = true
 
 [node name="Label" type="Label" parent="Node2D8" unique_id=1135259292]
@@ -255,7 +259,7 @@ offset_left = -94.0
 offset_top = 175.0
 offset_right = 93.0
 offset_bottom = 203.0
-text = "More Stamina"
+text = "Money Multiplier"
 label_settings = SubResource("LabelSettings_h5spr")
 horizontal_alignment = 1
 metadata/_edit_use_anchors_ = true
@@ -281,7 +285,7 @@ offset_left = 273.0
 offset_top = 175.0
 offset_right = 460.0
 offset_bottom = 203.0
-text = "More Stamina"
+text = "???"
 label_settings = SubResource("LabelSettings_h5spr")
 horizontal_alignment = 1
 metadata/_edit_use_anchors_ = true
@@ -305,4 +309,6 @@ text = "Next Day"
 [connection signal="pressed" from="Node2D4/Button" to="Node2D4" method="_on_button_pressed"]
 [connection signal="pressed" from="Node2D5/Button" to="Node2D5" method="_on_button_pressed"]
 [connection signal="pressed" from="Node2D6/Button" to="Node2D6" method="_on_button_pressed"]
+[connection signal="pressed" from="Node2D7/Button" to="Node2D7" method="_on_button_pressed"]
+[connection signal="pressed" from="Node2D8/Button" to="Node2D8" method="_on_button_pressed"]
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

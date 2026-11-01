@@ -4,6 +4,7 @@ extends Node2D
 @onready var player = get_node("../../Player")
 static var shovel = 1
 static var silent = 1
+static var lucky = false
 
 func _ready() -> void:
 	$Sprite2D.visible = false;
@@ -23,10 +24,18 @@ func _process(_delta: float) -> void:
 					$Sprite2D.visible = true
 					$ProgressBar.visible = false
 					var chance = randi() % 20
-					if chance <= 10:
-						player.bones += (randi() % 4) + 3
-					elif chance <= 16:
-						player.skulls += (randi() % 2) + 1
+					if lucky:
+						if chance <= 8:
+							player.bones += (randi() % 4) + 3
+						elif chance <= 15:
+							player.skulls += (randi() % 2) + 1
+						else:
+							player.teeth += 1
 					else:
-						player.teeth += 1
+						if chance <= 10:
+							player.bones += (randi() % 4) + 3
+						elif chance <= 16:
+							player.skulls += (randi() % 2) + 1
+						else:
+							player.teeth += 1
 					get_node("../../CanvasLayer/Label").text = "Bones: " + str(player.bones) + "  Skulls: " + str(player.skulls) + "  Gold Teeth: " + str(player.teeth)
