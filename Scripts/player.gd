@@ -70,5 +70,5 @@ func update_animation(dir: Vector2) -> void:
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body is Player:
-		level += 1
+		Market.caught = 1
 		get_tree().call_deferred("change_scene_to_file", "res://Levels/market.tscn")
