@@ -5,6 +5,8 @@
 [ext_resource type="Texture2D" uid="uid://e2ve8ena5nm2" path="res://Sprites/graveyard.png" id="3_0xeif"]
 [ext_resource type="Texture2D" uid="uid://dj5qxb7y8s7jl" path="res://Sprites/space.jpg" id="4_gdvy0"]
 [ext_resource type="Texture2D" uid="uid://cpxgpkccrjh5j" path="res://Sprites/shift.png" id="5_hga2d"]
+[ext_resource type="Texture2D" uid="uid://dks3ecy45cg33" path="res://Sprites/Guard-Walk.png" id="6_e312d"]
+[ext_resource type="Texture2D" uid="uid://b7c6t6t0ubej" path="res://Sprites/SpriteSheet.png" id="7_j0mkc"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hga2d"]
 
@@ -73,7 +75,7 @@ offset_top = -136.0
 offset_right = 459.0
 offset_bottom = -61.0
 text = "Sprint to your destination
-Make sure to watch out for your stamina!"
+Make sure to control your stamina!"
 horizontal_alignment = 1
 autowrap_mode = 3
 
@@ -81,5 +83,68 @@ autowrap_mode = 3
 position = Vector2(301.06232, -50.374992)
 scale = Vector2(0.14081882, 0.14081882)
 texture = ExtResource("5_hga2d")
+
+[node name="Line2D2" type="Line2D" parent="." unique_id=43755632]
+position = Vector2(-191, -172)
+rotation = 2.7662466
+points = PackedVector2Array(-235, -184, 30.715912, -165.24387, -13, -204, 32.57666, -164.51067, -6.4742126, -139.05426)
+
+[node name="Sprite2D5" type="Sprite2D" parent="." unique_id=147034113]
+position = Vector2(-227.00002, -10.411285)
+scale = Vector2(1.8548387, 1.8548387)
+texture = ExtResource("6_e312d")
+region_enabled = true
+region_rect = Rect2(0, 0, 31.666687, 47.909096)
+
+[node name="Label3" type="Label" parent="." unique_id=990903989]
+offset_left = -464.0
+offset_top = -23.41129
+offset_right = -274.0
+offset_bottom = 7.588711
+text = "Watch out for the guard!"
+horizontal_alignment = 1
+
+[node name="Line2D3" type="Line2D" parent="." unique_id=722547504]
+position = Vector2(167, 236)
+points = PackedVector2Array(-330, -196, 5, -180, -13, -204, 9, -177, -9, -155)
+
+[node name="Sprite2D6" type="Sprite2D" parent="." unique_id=2092344048]
+position = Vector2(498, 62)
+scale = Vector2(6.0441184, 6.044118)
+texture = ExtResource("7_j0mkc")
+region_enabled = true
+region_rect = Rect2(0, 48.15792, 16.162088, 17.41896)
+
+[node name="Label4" type="Label" parent="." unique_id=1646941748]
+offset_left = 199.0
+offset_top = 10.0
+offset_right = 434.0
+offset_bottom = 137.0
+text = "You make noise when you walk, sprint, or dig
+Avoid these around the guard or he'll start chasing you"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Line2D4" type="Line2D" parent="." unique_id=204975457]
+position = Vector2(-88.000015, 21)
+rotation = 2.7662466
+points = PackedVector2Array(-235, -184, 91.55457, -106.8773, 52.564613, -141.58728, 90.6242, -107.24389, 49.14878, -83.81764)
+
+[node name="Sprite2D7" type="Sprite2D" parent="." unique_id=588790154]
+position = Vector2(-385.99997, 264)
+scale = Vector2(2.9848485, 2.9848485)
+texture = ExtResource("3_0xeif")
+region_enabled = true
+region_rect = Rect2(268.46695, 175.82793, 84.333405, 33.063828)
+
+[node name="Label5" type="Label" parent="." unique_id=1850825389]
+offset_left = -541.0
+offset_top = 117.0
+offset_right = -161.0
+offset_bottom = 205.0
+text = "Leave the graveyard by going through the exit
+Sell your items on the black market and make the most money in 7 days"
+horizontal_alignment = 1
+autowrap_mode = 3
 
 [connection signal="pressed" from="Button" to="Button" method="_on_pressed"]
