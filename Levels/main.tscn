@@ -1463,13 +1463,13 @@ layer_2/tile_data = PackedInt32Array(1376288, 1769472, 11, 1441760, 1507328, 11,
 metadata/_edit_group_ = true
 
 [node name="Player" parent="." unique_id=1981730263 instance=ExtResource("3_34bfm")]
-position = Vector2(-50.999977, -62.000015)
+position = Vector2(10.999996, 310.99994)
 
 [node name="Guard" parent="." unique_id=111662285 node_paths=PackedStringArray("patrol_path") instance=ExtResource("4_7pswh")]
 z_index = 1
-levels = Array[int]([1])
 motion_mode = 1
 patrol_path = NodePath("../PatrolPath")
+levels = Array[int]([1])
 
 [node name="Dig Sites" type="Node2D" parent="." unique_id=1307790401]
 
