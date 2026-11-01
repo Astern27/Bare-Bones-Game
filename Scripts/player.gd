@@ -28,11 +28,11 @@ func _physics_process(_delta: float) -> void:
 	if direction != Vector2.ZERO:
 		if Input.is_action_pressed("Sprint") and stamina.value > 0:
 			velocity = direction * 200 * running
-			$Noise/CollisionShape2D.shape.radius = 2000 * boots
+			$Noise/CollisionShape2D.shape.radius = 1500 * boots
 			stamina.value -= 1.7;
 		else:
 			velocity = direction * 80 * running
-			$Noise/CollisionShape2D.shape.radius = 1000 * boots
+			$Noise/CollisionShape2D.shape.radius = 750 * boots
 			if stamina.value > 1:
 				stamina.value += .3 * recharge
 			

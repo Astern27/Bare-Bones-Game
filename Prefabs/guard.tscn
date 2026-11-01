@@ -165,21 +165,18 @@ animations = [{
 script = ExtResource("1_avean")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1537900154]
-position = Vector2(229, -210)
 shape = SubResource("RectangleShape2D_rffmb")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=390865934]
 texture_filter = 1
-position = Vector2(229, -210)
 scale = Vector2(1, 0.8958333)
 sprite_frames = SubResource("SpriteFrames_rffmb")
-animation = &"walk_down"
+animation = &"idle_down"
 
 [node name="RayCast2D" type="RayCast2D" parent="." unique_id=1141905788]
-position = Vector2(229, -210)
 target_position = Vector2(-1, 62)
 
 [node name="VisionCone" type="Area2D" parent="." unique_id=915222864]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="VisionCone" unique_id=1733524107]
-polygon = PackedVector2Array(229, -210, 135, -72, 328, -72)
+polygon = PackedVector2Array(69, 120, 0, 0, -65, 120)
